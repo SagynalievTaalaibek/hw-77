@@ -20,6 +20,11 @@ const Form: React.FC<Props> = ({onSubmit, isLoading}) => {
   const submitFormHandler = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(state);
+    setState({
+      message: '',
+      author: '',
+      image: null,
+    })
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +52,6 @@ const Form: React.FC<Props> = ({onSubmit, isLoading}) => {
       sx={{
         '& .MuiTextField-root': {width: '45ch', mb: 1},
       }}
-      noValidate
       autoComplete="off"
       onSubmit={submitFormHandler}
     >

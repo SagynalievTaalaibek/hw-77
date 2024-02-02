@@ -1,5 +1,7 @@
-import React, {useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
+import { useAppSelector } from '../../app/hooks';
+import { selectCreateMessageLoading } from '../../store/message/messageSlice';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,9 +10,17 @@ interface Props {
 }
 
 const FileInput: React.FC<Props> = ({onChange, name, label}) => {
+  const createLoading = useAppSelector(selectCreateMessageLoading);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [filename, setFilename] = useState('');
+
+  useEffect(() => {
+    if (createLoading) {
+      setFilename('');
+    }
+  }, [createLoading]);
+
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

@@ -5,7 +5,6 @@ import {imagesUpload} from "../multer";
 
 const messagesRouter = express.Router();
 
-
 messagesRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
     try {
         const message = req.body.message;
@@ -15,6 +14,7 @@ messagesRouter.post('/', imagesUpload.single('image'), async (req, res, next) =>
         }
 
         const newMessage: Message = {
+            id: crypto.randomUUID(),
             message,
             author: req.body.author,
             image: req.file ? req.file.filename : null,
