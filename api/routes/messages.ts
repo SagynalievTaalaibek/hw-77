@@ -23,6 +23,17 @@ messagesRouter.post('/', imagesUpload.single('image'), async (req, res, next) =>
         await messageDb.addMessage(newMessage);
         res.send(newMessage);
     } catch (e) {
+        console.error(e);
+        next(e);
+    }
+});
+
+messagesRouter.get('/', async (_, res, next) => {
+    try {
+        const messages = await messageDb.getMessages();
+        res.send(messages);
+    } catch (e) {
+        console.error(e);
         next(e);
     }
 });

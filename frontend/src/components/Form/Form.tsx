@@ -17,8 +17,7 @@ const Form: React.FC<Props> = ({onSubmit, isLoading}) => {
     image: null,
   });
 
-  const submitFormHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+  const submitFormHandler = () => {
     onSubmit(state);
     setState({
       message: '',
